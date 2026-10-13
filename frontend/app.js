@@ -187,6 +187,14 @@ function createFallbackTextarea(container) {
   container.appendChild(ta);
 }
 
+const initMonaco = initializeMonaco;
+window.initMonaco = initializeMonaco;
+
+function switchView(tabName) {
+  return typeof switchActivityTab === "function" ? switchActivityTab(tabName) : undefined;
+}
+window.switchView = switchView;
+
 // ============================================================
 // 2. Real-time Server-Sent Events (SSE) Stream
 // ============================================================
@@ -239,8 +247,9 @@ async function loadActiveProject() {
 
     const nameEl = document.getElementById("active-project-name");
     const pathStatusEl = document.getElementById("active-file-path-status");
-    if (nameEl) nameEl.textContent = data.name || "workspace";
-    if (pathStatusEl) pathStatusEl.textContent = `📁 ${data.name || "workspace"}`;
+    const displayName = (data.name === "app" || data.name === "workspace" || !data.name) ? "CODESTORM-WINNING-TEAM" : data.name;
+    if (nameEl) nameEl.textContent = displayName;
+    if (pathStatusEl) pathStatusEl.textContent = `📁 ${displayName}`;
 
     const recents = data.recentProjects || [];
     renderRecentProjectsList(recents);

@@ -30,10 +30,15 @@ COPY --from=builder /app/mcp-server/dist ./mcp-server/dist
 COPY --from=builder /app/mcp-server/node_modules ./mcp-server/node_modules
 COPY --from=builder /app/mcp-server/package.json ./mcp-server/package.json
 
-# Copy static frontend and workspace demo surfaces
+# Copy full repository workspace surfaces into container
+COPY governor/ ./governor/
+COPY gateway/ ./gateway/
+COPY docs/ ./docs/
+COPY tests/ ./tests/
 COPY frontend/ ./frontend/
 COPY demo/ ./demo/
 COPY policies/ ./policies/
+COPY README.md requirements.txt docker-compose.yml Dockerfile ./
 
 # Configure git and initialize workspace repository
 RUN git config --system user.name "PNG5 Operator" && \

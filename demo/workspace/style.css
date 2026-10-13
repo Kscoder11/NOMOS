@@ -202,3 +202,39 @@ body {
   background-color: #1D4ED8 !important;
   transform: translateY(-1px);
 }
+
+/* Responsive Mobile Layout & Breakpoint Enhancements */
+@media screen and (max-width: 768px) {
+  .ide-app-container, .main-layout, .container {
+    width: 100% !important;
+    padding: 8px !important;
+    flex-direction: column !important;
+  }
+  .features-grid, .steps-grid, .scenarios-grid, .grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+  .primary-sidebar, .right-assistant-preview {
+    width: 100% !important;
+    max-height: 350px !important;
+  }
+  .hero-title {
+    font-size: 2.2rem !important;
+    line-height: 1.2 !important;
+  }
+}
+
+/* Updated Primary Button Style */
+.btn-primary, .btn-hero-primary {
+  background-color: #2563EB !important;
+  color: #FFFFFF !important;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-weight: 600;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+  transition: all 0.2s ease;
+}
+.btn-primary:hover, .btn-hero-primary:hover {
+  background-color: #1D4ED8 !important;
+  transform: translateY(-1px);
+}

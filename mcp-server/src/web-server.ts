@@ -621,8 +621,9 @@ async function handleRequest(req: IncomingMessage, res: ServerResponse): Promise
       };
       countFiles(tree);
 
+      const displayName = (basename(activeProjectRoot) === "app" ? "CODESTORM-WINNING-TEAM" : basename(activeProjectRoot)) || activeProjectRoot;
       sendJson(res, 200, {
-        name: basename(activeProjectRoot) || activeProjectRoot,
+        name: displayName,
         path: activeProjectRoot,
         framework,
         totalFiles: count,
@@ -721,9 +722,10 @@ async function handleRequest(req: IncomingMessage, res: ServerResponse): Promise
     // 3. GET /api/project/tree — File hierarchy tree
     if (method === "GET" && pathname === "/api/project/tree") {
       const tree = buildFileTree(activeProjectRoot);
+      const displayName = (basename(activeProjectRoot) === "app" ? "CODESTORM-WINNING-TEAM" : basename(activeProjectRoot)) || activeProjectRoot;
       sendJson(res, 200, {
         root: activeProjectRoot,
-        name: basename(activeProjectRoot) || activeProjectRoot,
+        name: displayName,
         tree,
       });
       return;

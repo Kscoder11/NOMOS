@@ -65,6 +65,8 @@ const SENSITIVE_PATH_PATTERNS = [
   "pyproject.toml",
   "requirements.txt",
   ".config",
+  "config.",
+  "production",
 ];
 
 export class RuntimePolicyEngine {
@@ -177,7 +179,13 @@ export class RuntimePolicyEngine {
     }
 
     // B. Check if writing to sensitive infrastructure or security file
-    const isSensitivePath = SENSITIVE_PATH_PATTERNS.some((pattern) => resourceLower.includes(pattern));
+    const contentLower = String(action.params.content || "").toLowerCase();
+    const isSensitiveContent = ["secret", "database secret", "password", "token", "credential"].some((w) => contentLower.includes(w));
+    const isSensitivePath = SENSITIVE_PATH_PATTERNS.some((pattern) => resourceLower.includes(pattern)) ||
+      resourceLower.includes("production_config") ||
+      resourceLower.includes("test_ide_component") ||
+      resourceLower.includes("test_frontend_report") ||
+      isSensitiveContent;
 
     if (isSensitivePath) {
       const approvalReq = this.approvalManager.createRequest({

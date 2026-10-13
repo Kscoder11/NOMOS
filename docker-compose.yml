@@ -37,6 +37,10 @@ services:
       - ADMIN_KEY=admin_key_secret_789
     depends_on:
       - governor
+    volumes:
+      - .:/app
+      - /app/mcp-server/node_modules
+      - /app/mcp-server/dist
     networks:
       - agent_net
       - backend_net
