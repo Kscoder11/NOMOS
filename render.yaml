@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: png5-nomos-backend
+    runtime: docker
+    dockerfilePath: Dockerfile
+    plan: free
+    region: oregon
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: GOVERNOR_URL
+        value: http://127.0.0.1:8000
+      - key: ORCHESTRATOR_KEY
+        generateValue: true
+      - key: REVIEWER_KEY
+        generateValue: true
+      - key: ADMIN_KEY
+        generateValue: true
+    healthCheckPath: /api/health

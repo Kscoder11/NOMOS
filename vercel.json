@@ -1,0 +1,71 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "version": 2,
+  "cleanUrls": true,
+  "outputDirectory": "frontend",
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/frontend/dist/index.html"
+    },
+    {
+      "source": "/ide",
+      "destination": "/frontend/ide.html"
+    },
+    {
+      "source": "/app",
+      "destination": "/frontend/ide.html"
+    },
+    {
+      "source": "/landing",
+      "destination": "/frontend/landing.html"
+    },
+    {
+      "source": "/presentation",
+      "destination": "/frontend/presentation.html"
+    },
+    {
+      "source": "/cyber",
+      "destination": "/frontend/cyber.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "destination": "/frontend/dist/assets/$1"
+    },
+    {
+      "source": "/style.css",
+      "destination": "/frontend/style.css"
+    },
+    {
+      "source": "/app.js",
+      "destination": "/frontend/app.js"
+    },
+    {
+      "source": "/landing.css",
+      "destination": "/frontend/landing.css"
+    },
+    {
+      "source": "/presentation.css",
+      "destination": "/frontend/presentation.css"
+    },
+    {
+      "source": "/presentation.js",
+      "destination": "/frontend/presentation.js"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        }
+      ]
+    }
+  ]
+}
